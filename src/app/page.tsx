@@ -15,7 +15,7 @@ export default function Home() {
     setResponse("");
 
     try {
-      const res = await fetch("http://localhost:8000/api/insight", {
+      const res = await fetch("http://rag-stock-news-backend:8000/api/insight", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
