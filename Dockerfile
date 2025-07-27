@@ -13,6 +13,15 @@ COPY package*.json ./
 # Install all dependencies listed in package.json
 RUN npm install
 
+# Install any additional build tools needed for compiling native modules
+# This is necessary for some packages that require compilation during installation
+# For example, if you use packages like bcrypt or sharp, they may need these tools
+# Note: Alpine uses musl instead of glibc, so we install libc6-compat for compatibility
+# If you don't need these tools, you can remove this line
+# but it is often required for building native modules in Node.js
+# Added 270725 on recommendation of ChatGBT as the fronted was showing an error
+RUN apk add --no-cache python3 make g++ libc6-compat
+
 # Copy the rest of the application code (your entire Next.js project)
 COPY . .
 
